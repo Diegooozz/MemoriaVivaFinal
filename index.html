@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memoria Viva | Plataforma Patrimonial</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="vista-login" class="vista-auth">
+        <div class="auth-overlay">
+            <div class="auth-card">
+
+                <div class="auth-logo-img">
+                    <img src="logo-memoria-viva.jpeg" alt="Logo Memoria Viva">
+                </div>
+
+                <h1>Memoria Viva</h1>
+                <p class="auth-subtitle">Inicia sesión para explorar el patrimonio cultural peruano.</p>
+
+                <form id="formulario-login">
+
+                    <div class="form-group">
+                        <label for="login-email">Correo electrónico</label>
+                        <div class="input-icon">
+                            <span>✉️</span>
+                            <input type="email" id="login-email" placeholder="Ingresa tu correo" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-pass">Contraseña</label>
+                        <div class="input-icon">
+                            <span>🔒</span>
+                            <input type="password" id="login-pass" placeholder="Ingresa tu contraseña" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">INICIAR SESIÓN</button>
+
+                    <button type="button" id="ir-a-registro" class="btn-link">
+                        ¿No tienes cuenta? Regístrate aquí
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="vista-registro" class="vista-auth oculto">
+        <div class="auth-overlay">
+            <div class="auth-card">
+
+                <div class="auth-logo-img">
+                    <img src="logo-memoria-viva.jpeg" alt="Logo Memoria Viva">
+                </div>
+
+                <h1>Nuevo explorador</h1>
+                <p class="auth-subtitle">Crea tu cuenta para guardar rutas, reseñas y favoritos.</p>
+
+                <form id="formulario-registro">
+
+                    <div class="form-group">
+                        <label for="reg-nombre">Nombre y apellido</label>
+                        <div class="input-icon">
+                            <span>👤</span>
+                            <input type="text" id="reg-nombre" placeholder="Ej. Valeria Ramírez" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-email">Correo electrónico</label>
+                        <div class="input-icon">
+                            <span>✉️</span>
+                            <input type="email" id="reg-email" placeholder="correo@gmail.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reg-pass">Contraseña</label>
+                        <div class="input-icon">
+                            <span>🔒</span>
+                            <input type="password" id="reg-pass" placeholder="Mínimo 4 caracteres" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">REGISTRARME</button>
+
+                    <button type="button" id="ir-a-login" class="btn-link">
+                        ¿Ya tienes cuenta? Inicia sesión
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="vista-principal" class="oculto">
+
+        <div id="sidebar-overlay" class="sidebar-overlay oculto"></div>
+
+        <aside id="sidebar-panel" class="sidebar-panel">
+
+            <div class="sidebar-header">
+                <div class="sidebar-brand">
+                    <img src="logo-memoria-viva.jpeg" alt="Logo Memoria Viva" class="mini-logo-img">
+                    <div>
+                        <h2>Memoria Viva</h2>
+                        <p>Panel de funciones</p>
+                    </div>
+                </div>
+
+                <button id="btn-cerrar-sidebar" class="btn-close" aria-label="Cerrar menú">×</button>
+            </div>
+
+            <ul class="sidebar-links">
+                <li><button class="nav-link activo" data-target="sec-explorar">🏛️ Explorar</button></li>
+                <li><button class="nav-link" data-target="sec-ver-resenas">⭐ Reseñas</button></li>
+                <li><button class="nav-link" data-target="sec-escribir-resena">✍️ Dejar reseña</button></li>
+                <li><button class="nav-link" data-target="sec-chatbot">🤖 MemorIA</button></li>
+                <li><button class="nav-link" data-target="sec-mapa">📍 Rutas GPS</button></li>
+                <li><button class="nav-link" data-target="sec-reconstruccion">🧠 Reconstrucción IA</button></li>
+                <li><button class="nav-link" data-target="sec-reportar-alerta">🚨 Reportar alerta</button></li>
+                <li><button class="nav-link" data-target="sec-eventos-culturales">🔔 Eventos culturales</button></li>
+                <li><button class="nav-link" data-target="sec-archivo-historico">📐 Archivo histórico</button></li>
+                <li><button class="nav-link" data-target="sec-cronologia-cultural">📜 Cronología</button></li>
+                <li><button class="nav-link" data-target="sec-desafios-grupales">🤝 Desafíos</button></li>
+                <li><button class="nav-link" data-target="sec-ranking-exploradores">🏆 Ranking</button></li>
+                <li><button class="nav-link" data-target="sec-analiticas-municipales">📊 Analíticas</button></li>
+                <li><button class="nav-link" data-target="sec-panel-admin">🧾 Panel Admin</button></li>
+                <li><button class="nav-link" data-target="sec-perfil">👤 Perfil</button></li>
+            </ul>
+
+        </aside>
+
+        <nav class="navbar">
+
+            <div class="navbar-left">
+                <button id="btn-abrir-sidebar" class="btn-menu">☰</button>
+
+                <div class="navbar-brand">
+                    <img src="logo-memoria-viva.jpeg" alt="Logo Memoria Viva" class="mini-logo-img">
+                    <div>
+                        <h2>Memoria Viva</h2>
+                        <span>Patrimonio cultural inteligente</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-actions">
+                <select id="selector-idioma-global" class="input-form select-small">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+
+                <select id="selector-audio-cultural" class="input-form select-small">
+                    <option value="es">Audio ES</option>
+                    <option value="qu">Audio Quechua</option>
+                </select>
+
+                <button class="btn-user nav-link" data-target="sec-perfil">
+                    Hola, <span class="nombre-usuario-dinamico">Usuario</span>
+                </button>
+            </div>
+
+        </nav>
+
+        <main class="main-container">
+
+            <section id="sec-explorar" class="section-app">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="hero">
+                    <div>
+                        <span class="hero-badge">Exploración patrimonial</span>
+                        <h1>Explora la memoria cultural del Perú</h1>
+                        <p>
+                            Descubre sitios arqueológicos, rutas, planos, audioguías, reconstrucciones, alertas ciudadanas y servicios cercanos.
+                        </p>
+                    </div>
+
+                    <div class="hero-gallery">
+                        <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?auto=format&fit=crop&w=900&q=80" alt="Machu Picchu">
+                        <img src="https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=900&q=80" alt="Patrimonio arqueológico">
+                    </div>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Patrimonio <span>cultural</span></h2>
+                        <p>Selecciona un sitio para ver historia, narrador, preguntas, mapa, audioguía y retos de conocimiento.</p>
+                    </div>
+
+                    <div class="search-box">
+                        <span>🔍</span>
+                        <input type="text" id="buscador-lugares" placeholder="Buscar sitio, cultura o ubicación...">
+                    </div>
+                </div>
+
+                <div id="contenedor-lugares" class="grid-cards"></div>
+
+            </section>
+
+            <section id="sec-ver-resenas" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Experiencias de <span>viajeros</span></h2>
+                        <p>Lee opiniones y comentarios sobre visitas culturales.</p>
+                    </div>
+                </div>
+
+                <div id="contenedor-resenas-publicas" class="grid-cards"></div>
+
+            </section>
+
+            <section id="sec-escribir-resena" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="two-column">
+
+                    <div class="info-panel">
+                        <h2>Tu voz <span>importa</span></h2>
+                        <p>
+                            Comparte tu experiencia cultural. Una buena reseña ayuda a otros visitantes y fortalece la valoración del patrimonio.
+                        </p>
+
+                        <ul class="nice-list">
+                            <li>Menciona el estado del sitio.</li>
+                            <li>Recomienda horarios o rutas.</li>
+                            <li>Evalúa accesibilidad y señalización.</li>
+                            <li>Cuenta qué aprendiste durante la visita.</li>
+                        </ul>
+                    </div>
+
+                    <form id="formulario-resena" class="form-card">
+
+                        <label for="lugar-resena">Lugar visitado</label>
+                        <select id="lugar-resena" class="input-form" required></select>
+
+                        <label>Calificación</label>
+                        <div id="selector-estrellas" class="stars">
+                            <span data-valor="1">★</span>
+                            <span data-valor="2">★</span>
+                            <span data-valor="3">★</span>
+                            <span data-valor="4">★</span>
+                            <span data-valor="5">★</span>
+                        </div>
+
+                        <input type="hidden" id="valor-estrellas" value="0">
+
+                        <label for="texto-resena">Tu reseña</label>
+                        <textarea id="texto-resena" class="input-form textarea" placeholder="Describe tu experiencia..." required></textarea>
+
+                        <button type="submit" class="btn-primary">PUBLICAR RESEÑA</button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <section id="sec-chatbot" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>MemorIA <span>guía cultural</span></h2>
+                        <p>
+                            Pregunta sobre historia, función, arquitectura, conservación, accesibilidad, rutas o reconstrucción de cada sitio.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="chat-layout">
+
+                    <div class="chat-help">
+                        <h3>Preguntas sugeridas</h3>
+
+                        <button class="chat-sugerencia" data-pregunta="¿Cuál era la función de Machu Picchu?">Función de Machu Picchu</button>
+                        <button class="chat-sugerencia" data-pregunta="Explícame la arquitectura de Huaca Pucllana">Arquitectura de Huaca Pucllana</button>
+                        <button class="chat-sugerencia" data-pregunta="¿Qué riesgos de conservación tiene Chan Chan?">Conservación de Chan Chan</button>
+                        <button class="chat-sugerencia" data-pregunta="¿Cómo puedo visitar Caral?">Ruta para visitar Caral</button>
+                        <button class="chat-sugerencia" data-pregunta="¿Qué se puede reconstruir con IA en Kuélap?">Reconstrucción de Kuélap</button>
+
+                        <div class="logic-box">
+                            <strong>Modo de respuesta:</strong>
+                            <p>
+                                MemorIA detecta el lugar, la intención de la pregunta y responde con una ficha cultural interna.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="chat-container">
+
+                        <div class="chat-header">
+                            <h3>🤖 MemorIA</h3>
+                            <button id="btn-limpiar-chat" class="btn-secondary btn-small">Limpiar</button>
+                        </div>
+
+                        <div id="chat-mensajes" class="chat-messages">
+                            <div class="mensaje bot">
+                                Hola. Soy MemorIA. Puedo responder sobre Machu Picchu, Huaca Pucllana, Líneas de Nazca, Caral, Chan Chan y Kuélap.
+                            </div>
+                        </div>
+
+                        <form id="formulario-chat" class="chat-form">
+                            <input type="text" id="input-chat" placeholder="Escribe tu pregunta cultural..." required>
+                            <button type="submit">Enviar</button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="sec-mapa" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Rutas GPS y <span>servicios cercanos</span></h2>
+                        <p>Selecciona sitios, calcula duración, revisa accesibilidad y busca instalaciones cercanas.</p>
+                    </div>
+                </div>
+
+                <div class="two-column">
+
+                    <div class="info-panel">
+                        <h3>Planificador de rutas</h3>
+
+                        <label class="checkbox-line">
+                            <input type="checkbox" id="filtro-accesibilidad">
+                            Mostrar solo sitios con accesibilidad favorable
+                        </label>
+
+                        <div id="lista-seleccion-rutas" class="list-box"></div>
+
+                        <label for="nombre-ruta-input">Nombre de la ruta</label>
+                        <input type="text" id="nombre-ruta-input" class="input-form" placeholder="Ej. Ruta cultural de Lima">
+
+                        <button id="btn-guardar-ruta" class="btn-primary">GUARDAR RUTA</button>
+
+                        <div class="result-box">
+                            <strong>Duración estimada:</strong>
+                            <span id="duracion-ruta-estimada">Selecciona sitios para calcular.</span>
+                        </div>
+                    </div>
+
+                    <div class="info-panel">
+                        <h3>Sitios en el mapa</h3>
+                        <p>Elige un sitio para actualizar el mapa y el origen de búsqueda.</p>
+
+                        <div id="contenedor-lugares-mapa" class="list-box"></div>
+                    </div>
+
+                </div>
+
+                <div class="map-card">
+                    <iframe
+                        id="mapa-iframe"
+                        src="https://www.google.com/maps?q=Machu+Picchu&output=embed"
+                        width="100%"
+                        height="470"
+                        style="border:0;"
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <div class="action-row">
+                    <button id="btn-ver-alrededor" class="btn-primary btn-auto">🌎 Ver alrededor aquí</button>
+                    <button id="btn-iniciar-recorrido-mapa" class="btn-secondary">▶️ Iniciar recorrido</button>
+                </div>
+
+                <div id="streetview-panel" class="streetview-panel oculto">
+                    <div class="section-header">
+                        <div>
+                            <h3>🌎 Vista alrededor</h3>
+                            <p>Vista panorámica y plano alternativo del entorno.</p>
+                        </div>
+
+                        <button id="btn-cerrar-streetview" class="btn-secondary">Cerrar</button>
+                    </div>
+
+                    <div class="around-grid">
+                        <iframe id="streetview-iframe" src="" loading="lazy"></iframe>
+                        <iframe id="osm-around-iframe" src="" loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div id="clima-visita-box" class="info-panel mt-24"></div>
+
+                <div class="info-panel mt-24">
+
+                    <div class="section-header">
+                        <div>
+                            <h3>🏥 Servicios y facilidades cercanas</h3>
+                            <p>Busca baños, boletería, hidratación, primeros auxilios y otros servicios según el sitio o tu ubicación real.</p>
+                        </div>
+
+                        <label class="checkbox-line">
+                            <input type="checkbox" id="toggle-servicios-mapa">
+                            Mostrar instalaciones
+                        </label>
+                    </div>
+
+                    <div class="service-toolbar">
+                        <button class="btn-service activo" data-servicio="todos">Todos</button>
+                        <button class="btn-service" data-servicio="Baños">🚻 Baños</button>
+                        <button class="btn-service" data-servicio="Boletería">🎫 Boletería</button>
+                        <button class="btn-service" data-servicio="Hidratación">💧 Hidratación</button>
+                        <button class="btn-service" data-servicio="Primeros auxilios">🏥 Primeros auxilios</button>
+                    </div>
+
+                    <div class="action-row">
+                        <button id="btn-usar-ubicacion-servicios" class="btn-secondary">📡 Usar mi ubicación</button>
+                        <button id="btn-usar-sitio-servicios" class="btn-secondary">📍 Usar sitio seleccionado</button>
+                        <button id="btn-buscar-osm-servicios" class="btn-primary btn-auto">🔎 Buscar servicios reales</button>
+                    </div>
+
+                    <div id="servicios-status" class="status-box">
+                        Activa “Mostrar instalaciones” para consultar servicios cercanos.
+                    </div>
+
+                    <div id="contenedor-servicios-mapa" class="grid-cards grid-two"></div>
+
+                </div>
+
+                <div class="info-panel mt-24">
+                    <h3>📅 Mis rutas guardadas</h3>
+                    <div id="contenedor-mis-visitas"></div>
+                </div>
+
+            </section>
+
+            <section id="sec-reconstruccion" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Reconstrucción <span>con IA</span></h2>
+                        <p>
+                            Simula reconstrucciones visuales, carga archivos de referencia y genera una interpretación educativa.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="recon-panel">
+
+                    <div class="recon-controls">
+                        <div>
+                            <label for="recon-sitio">Sitio arqueológico</label>
+                            <select id="recon-sitio" class="input-form"></select>
+                        </div>
+
+                        <div>
+                            <label for="recon-enfoque">Enfoque</label>
+                            <select id="recon-enfoque" class="input-form">
+                                <option value="arquitectura">Arquitectura</option>
+                                <option value="materialidad">Materialidad y color</option>
+                                <option value="conservacion">Conservación</option>
+                                <option value="recorrido">Recorrido interpretativo</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="recon-nivel">Nivel de reconstrucción</label>
+                            <input type="range" id="recon-nivel" min="0" max="100" value="60">
+                            <small id="recon-nivel-texto">60% interpretado</small>
+                        </div>
+                    </div>
+
+                    <div class="recon-files">
+                        <div class="file-box">
+                            <label for="recon-file-actual">Foto actual del sitio</label>
+                            <input type="file" id="recon-file-actual" accept="image/*">
+                        </div>
+
+                        <div class="file-box">
+                            <label for="recon-file-plano">Plano o referencia histórica</label>
+                            <input type="file" id="recon-file-plano" accept="image/*,.pdf,.svg">
+                        </div>
+
+                        <div class="file-box">
+                            <label for="recon-file-3d">Archivo 3D referencial</label>
+                            <input type="file" id="recon-file-3d" accept=".glb,.gltf,.obj,.stl,.fbx">
+                        </div>
+                    </div>
+
+                    <div id="recon-archivos-lista" class="status-box">
+                        No se han cargado archivos de reconstrucción.
+                    </div>
+
+                    <div class="recon-grid">
+
+                        <div class="recon-view">
+                            <h3>Base actual / referencia</h3>
+                            <div id="recon-actual" class="recon-canvas"></div>
+                        </div>
+
+                        <div class="recon-view recon-destacada">
+                            <h3>Reconstrucción interpretativa</h3>
+                            <div id="recon-ia" class="recon-canvas"></div>
+                        </div>
+
+                    </div>
+
+                    <div id="recon-explicacion" class="info-panel"></div>
+
+                    <div class="action-row">
+                        <button id="btn-generar-recon" class="btn-primary btn-auto">GENERAR INTERPRETACIÓN</button>
+                        <button id="btn-descargar-recon" class="btn-secondary">Descargar SVG</button>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="sec-reportar-alerta" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="two-column">
+
+                    <div class="info-panel">
+                        <h2>Reporte de <span>estado patrimonial</span></h2>
+                        <p>
+                            Registra daños, deterioro, basura, pintas o riesgos observados en un sitio arqueológico.
+                        </p>
+
+                        <ul class="nice-list">
+                            <li>Foto obligatoria.</li>
+                            <li>Descripción clara.</li>
+                            <li>Ubicación GPS.</li>
+                            <li>Revisión en panel admin.</li>
+                        </ul>
+                    </div>
+
+                    <form id="formulario-alerta" class="form-card">
+
+                        <label for="alerta-lugar">Lugar afectado</label>
+                        <select id="alerta-lugar" class="input-form" required></select>
+
+                        <label for="alerta-tipo">Tipo de afectación</label>
+                        <select id="alerta-tipo" class="input-form" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Pared dañada">Pared dañada</option>
+                            <option value="Pintas o grafitis">Pintas o grafitis</option>
+                            <option value="Basura acumulada">Basura acumulada</option>
+                            <option value="Estructura deteriorada">Estructura deteriorada</option>
+                            <option value="Acceso inseguro">Acceso inseguro</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+
+                        <label for="alerta-foto">Foto del daño</label>
+                        <input type="file" id="alerta-foto" class="input-form" accept="image/*" required>
+
+                        <img id="alerta-preview" class="preview-img oculto" alt="Vista previa">
+
+                        <label for="alerta-descripcion">Descripción</label>
+                        <textarea id="alerta-descripcion" class="input-form textarea" placeholder="Describe el problema observado..." required></textarea>
+
+                        <div id="alerta-geo-status" class="status-box">
+                            Ubicación pendiente.
+                        </div>
+
+                        <button type="button" id="btn-obtener-ubicacion-alerta" class="btn-secondary full">📍 Obtener ubicación actual</button>
+
+                        <button type="submit" class="btn-primary">ENVIAR REPORTE</button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+            <section id="sec-eventos-culturales" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Eventos <span>culturales</span></h2>
+                        <p>Registra y consulta actividades culturales cercanas.</p>
+                    </div>
+
+                    <div class="badge-card">
+                        <span>🔔</span>
+                        <p id="estado-notificaciones-eventos">Notificaciones no activadas.</p>
+                    </div>
+                </div>
+
+                <div class="two-column">
+
+                    <div class="info-panel">
+                        <h3>Configurar notificaciones</h3>
+
+                        <label for="eventos-distrito-usuario">Distrito</label>
+                        <select id="eventos-distrito-usuario" class="input-form">
+                            <option value="Miraflores">Miraflores</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="Cercado de Lima">Cercado de Lima</option>
+                            <option value="Barranco">Barranco</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Caral">Caral</option>
+                            <option value="Trujillo">Trujillo</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Nazca">Nazca</option>
+                        </select>
+
+                        <button id="btn-activar-notificaciones-eventos" class="btn-primary">ACTIVAR NOTIFICACIONES</button>
+                        <button id="btn-desactivar-notificaciones-eventos" class="btn-link danger">Desactivar notificaciones</button>
+                    </div>
+
+                    <form id="formulario-evento-cultural" class="form-card">
+
+                        <label for="evento-nombre">Nombre del evento</label>
+                        <input type="text" id="evento-nombre" class="input-form" required>
+
+                        <label for="evento-tipo">Tipo</label>
+                        <select id="evento-tipo" class="input-form" required>
+                            <option value="">Selecciona</option>
+                            <option value="Charla cultural">Charla cultural</option>
+                            <option value="Feria cultural">Feria cultural</option>
+                            <option value="Taller educativo">Taller educativo</option>
+                            <option value="Visita guiada">Visita guiada</option>
+                            <option value="Exposición">Exposición</option>
+                        </select>
+
+                        <label for="evento-distrito">Distrito</label>
+                        <select id="evento-distrito" class="input-form" required>
+                            <option value="Miraflores">Miraflores</option>
+                            <option value="San Miguel">San Miguel</option>
+                            <option value="Cercado de Lima">Cercado de Lima</option>
+                            <option value="Barranco">Barranco</option>
+                            <option value="Cusco">Cusco</option>
+                            <option value="Caral">Caral</option>
+                            <option value="Trujillo">Trujillo</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Nazca">Nazca</option>
+                        </select>
+
+                        <label for="evento-fecha">Fecha y hora</label>
+                        <input type="datetime-local" id="evento-fecha" class="input-form" required>
+
+                        <label for="evento-lugar">Lugar</label>
+                        <input type="text" id="evento-lugar" class="input-form" required>
+
+                        <label for="evento-mapa">Enlace de mapa</label>
+                        <input type="url" id="evento-mapa" class="input-form" placeholder="https://www.google.com/maps?q=..." required>
+
+                        <label for="evento-descripcion">Descripción</label>
+                        <textarea id="evento-descripcion" class="input-form textarea" required></textarea>
+
+                        <button type="submit" class="btn-primary">REGISTRAR EVENTO</button>
+
+                    </form>
+
+                </div>
+
+                <div id="contenedor-eventos-culturales" class="grid-cards mt-24"></div>
+
+            </section>
+
+            <section id="sec-archivo-historico" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Archivo histórico y <span>planimétrico</span></h2>
+                        <p>
+                            Visualiza plano real actual, esquema técnico interpretativo, fuente y notas documentales por sitio.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="archive-layout">
+
+                    <div class="info-panel">
+                        <h3>Seleccionar archivo</h3>
+
+                        <label for="archivo-sitio">Sitio arqueológico</label>
+                        <select id="archivo-sitio" class="input-form"></select>
+
+                        <div class="tab-row">
+                            <button class="tab-btn activo" data-archivo-tab="real">Plano real</button>
+                            <button class="tab-btn" data-archivo-tab="tecnico">Esquema técnico</button>
+                            <button class="tab-btn" data-archivo-tab="fuente">Fuente y notas</button>
+                        </div>
+
+                        <div id="archivo-info" class="archive-info"></div>
+                    </div>
+
+                    <div class="archive-view">
+                        <div id="archivo-contenido"></div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="sec-cronologia-cultural" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Cronología <span>cultural</span></h2>
+                        <p>Recorre periodos históricos y culturas representativas.</p>
+                    </div>
+                </div>
+
+                <div id="contenedor-timeline-cultural" class="timeline"></div>
+                <div id="detalle-timeline-cultural" class="info-panel mt-24"></div>
+
+            </section>
+
+            <section id="sec-desafios-grupales" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="two-column">
+
+                    <form id="formulario-desafio" class="form-card">
+
+                        <h2>Desafíos <span>grupales</span></h2>
+
+                        <label for="desafio-equipo">Nombre del equipo</label>
+                        <input type="text" id="desafio-equipo" class="input-form" placeholder="Ej. Exploradores UNI" required>
+
+                        <label for="desafio-sitio">Sitio arqueológico</label>
+                        <select id="desafio-sitio" class="input-form" required></select>
+
+                        <button type="submit" class="btn-primary">INICIAR DESAFÍO</button>
+
+                    </form>
+
+                    <div class="info-panel">
+                        <h3>Desafío activo</h3>
+                        <div id="contenedor-desafio-activo"></div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="sec-ranking-exploradores" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Ranking de <span>exploradores</span></h2>
+                        <p>Clasificación por XP cultural, reseñas, rutas y reportes.</p>
+                    </div>
+                </div>
+
+                <div id="ranking-resumen-usuario" class="info-panel"></div>
+                <div id="contenedor-ranking-exploradores" class="ranking-list mt-24"></div>
+
+            </section>
+
+            <section id="sec-analiticas-municipales" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Analíticas para <span>gestión municipal</span></h2>
+                        <p>Reporte referencial de actividad turística, reportes y rutas.</p>
+                    </div>
+                </div>
+
+                <div class="analytics-controls">
+                    <div>
+                        <label for="analitica-fecha-desde">Desde</label>
+                        <input type="date" id="analitica-fecha-desde" class="input-form">
+                    </div>
+
+                    <div>
+                        <label for="analitica-fecha-hasta">Hasta</label>
+                        <input type="date" id="analitica-fecha-hasta" class="input-form">
+                    </div>
+
+                    <button id="btn-generar-analiticas" class="btn-primary">GENERAR REPORTE</button>
+                </div>
+
+                <div id="contenedor-analiticas-municipales" class="mt-24"></div>
+
+            </section>
+
+            <section id="sec-panel-admin" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="section-header">
+                    <div>
+                        <h2>Panel <span>administrador</span></h2>
+                        <p>Revisa reportes ciudadanos y modelos 3D de reconstrucción.</p>
+                    </div>
+                </div>
+
+                <div class="tab-row">
+                    <button class="admin-tab activo" data-admin-tab="reportes">Reportes ciudadanos</button>
+                    <button class="admin-tab" data-admin-tab="modelos">Modelos 3D</button>
+                </div>
+
+                <div id="admin-tab-reportes" class="admin-content">
+                    <div id="contenedor-reportes-admin" class="grid-cards"></div>
+                </div>
+
+                <div id="admin-tab-modelos" class="admin-content oculto">
+
+                    <div class="two-column">
+
+                        <form id="formulario-modelo3d" class="form-card">
+
+                            <h3>Subir modelo 3D</h3>
+
+                            <label for="modelo-nombre">Nombre del modelo</label>
+                            <input type="text" id="modelo-nombre" class="input-form" required>
+
+                            <label for="modelo-sitio">Sitio arqueológico</label>
+                            <select id="modelo-sitio" class="input-form" required></select>
+
+                            <label for="modelo-precision">Precisión estimada</label>
+                            <select id="modelo-precision" class="input-form" required>
+                                <option value="Alta">Alta</option>
+                                <option value="Media">Media</option>
+                                <option value="Baja">Baja</option>
+                            </select>
+
+                            <label for="modelo-archivo">Archivo 3D</label>
+                            <input type="file" id="modelo-archivo" class="input-form" accept=".glb,.gltf,.obj,.fbx,.stl">
+
+                            <label for="modelo-observacion">Observación técnica</label>
+                            <textarea id="modelo-observacion" class="input-form textarea" required></textarea>
+
+                            <button type="submit" class="btn-primary">SUBIR MODELO</button>
+
+                        </form>
+
+                        <div class="info-panel">
+                            <h3>Modelos registrados</h3>
+                            <div id="contenedor-modelos-admin" class="grid-cards grid-one"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="sec-perfil" class="section-app oculto">
+
+                <div class="section-deco">
+                    <span></span><span></span><span></span>
+                </div>
+
+                <div class="profile-card">
+
+                    <div class="avatar">
+                        <span class="inicial-usuario">U</span>
+                    </div>
+
+                    <h2 class="nombre-usuario-dinamico">Usuario</h2>
+                    <p id="perfil-correo-txt">correo@ejemplo.com</p>
+
+                    <div class="stats">
+                        <div>
+                            <strong id="contador-xp">0</strong>
+                            <span>XP</span>
+                        </div>
+
+                        <div>
+                            <strong id="contador-visitas">0</strong>
+                            <span>Reseñas</span>
+                        </div>
+
+                        <div>
+                            <strong id="contador-rutas">0</strong>
+                            <span>Rutas</span>
+                        </div>
+                    </div>
+
+                    <button id="btn-cerrar-sesion" class="btn-secondary full">Cerrar sesión</button>
+
+                </div>
+
+                <div class="two-column mt-24">
+                    <div class="info-panel">
+                        <h3>🎖️ Insignias</h3>
+                        <div id="contenedor-insignias" class="grid-cards grid-two"></div>
+                    </div>
+
+                    <div class="info-panel">
+                        <h3>📌 Favoritos</h3>
+                        <div id="contenedor-favoritos" class="grid-cards grid-one"></div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <div id="modal-lugar" class="modal oculto">
+        <div class="modal-content large">
+
+            <button id="cerrar-modal-lugar" class="modal-close">×</button>
+
+            <img id="modal-lugar-img" class="modal-img" alt="Lugar cultural">
+
+            <div class="modal-body">
+
+                <div class="modal-title-row">
+                    <div>
+                        <h2 id="modal-lugar-titulo">Sitio</h2>
+                        <p id="modal-lugar-ubicacion">Ubicación</p>
+                    </div>
+
+                    <span id="modal-lugar-cultura" class="tag">Cultura</span>
+                </div>
+
+                <p><strong>Época:</strong> <span id="modal-lugar-epoca"></span></p>
+                <p id="modal-lugar-desc"></p>
+
+                <div id="modal-verificacion" class="status-box"></div>
+                <div id="modal-info-ampliada"></div>
+                <div id="modal-preguntas-lugar"></div>
+                <div id="modal-reto-conocimiento"></div>
+                <div id="modal-recorrido-box" class="status-box"></div>
+
+                <div class="action-row">
+                    <button id="btn-favorito-modal" class="btn-secondary">♡ Favorito</button>
+                    <button id="btn-iniciar-recorrido" class="btn-secondary">▶️ Recorrido</button>
+                    <button id="btn-audioguia-cultural" class="btn-secondary">🔊 Audioguía</button>
+                    <button id="btn-abrir-ra" class="btn-primary btn-auto">👁️ Guía RA</button>
+                    <button id="btn-abrir-alerta" class="btn-danger">🚨 Reportar alerta</button>
+                </div>
+
+                <div class="sabias-box">
+                    <h3>💡 ¿Sabías que...?</h3>
+                    <p id="modal-lugar-curioso"></p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-ra" class="modal oculto">
+        <div class="modal-content">
+
+            <button id="cerrar-modal-ra" class="modal-close">×</button>
+
+            <div class="ra-screen">
+                <p class="camera-label">📷 Cámara activa simulada</p>
+                <div class="ar-object">🗿</div>
+                <p id="subtitulos-ra" class="subtitles oculto"></p>
+            </div>
+
+            <div class="modal-body">
+                <h2 id="ra-titulo">Guía narrativa</h2>
+                <p id="ra-texto"></p>
+
+                <div class="action-row">
+                    <button id="btn-ra-play" class="btn-primary btn-auto">▶️ Reproducir</button>
+                    <button id="btn-ra-pause" class="btn-secondary">⏸️ Pausar</button>
+                    <button id="btn-ra-subtitulos" class="btn-secondary">💬 Subtítulos</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-comentarios" class="modal oculto">
+        <div class="modal-content">
+
+            <button id="cerrar-modal-comentarios" class="modal-close">×</button>
+
+            <div class="modal-body">
+                <h2>Comentarios</h2>
+                <p>Reseña de <strong id="modal-resena-autor">Usuario</strong></p>
+                <p id="modal-resena-texto"></p>
+
+                <p><strong>Comentarios:</strong> <span id="modal-resena-count">0</span></p>
+
+                <div id="contenedor-lista-comentarios" class="comment-list"></div>
+
+                <form id="formulario-nuevo-comentario" class="comment-form">
+                    <input type="text" id="input-nuevo-comentario" class="input-form" placeholder="Escribe un comentario..." required>
+                    <button type="submit" class="btn-primary btn-auto">Comentar</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modal-compartir" class="modal oculto">
+        <div class="modal-content">
+
+            <button id="cerrar-modal-compartir" class="modal-close">×</button>
+
+            <div class="modal-body">
+                <h2>Compartir logro</h2>
+
+                <p><strong id="share-logro">Logro cultural</strong></p>
+                <p>Sitio: <strong id="share-sitio">Sitio</strong></p>
+
+                <textarea id="texto-compartir" class="input-form textarea"></textarea>
+
+                <div class="action-row">
+                    <button id="btn-web-share" class="btn-primary btn-auto">Compartir</button>
+                    <button id="btn-copiar-share" class="btn-secondary">Copiar texto</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <button id="btn-ayuda-flotante" class="help-button">❓ Ayuda</button>
+
+    <div id="modal-ayuda" class="modal oculto">
+        <div class="modal-content">
+
+            <button id="cerrar-modal-ayuda" class="modal-close">×</button>
+
+            <div class="modal-body">
+                <h2>Guía de uso</h2>
+
+                <ul class="nice-list">
+                    <li><strong>Explorar:</strong> abre fichas culturales con información ampliada.</li>
+                    <li><strong>Reto de conocimiento:</strong> responde preguntas para comprobar lo aprendido.</li>
+                    <li><strong>MemorIA:</strong> responde según sitio, intención y base cultural.</li>
+                    <li><strong>Rutas GPS:</strong> mapa, servicios reales y vista alrededor.</li>
+                    <li><strong>Reconstrucción IA:</strong> carga imágenes, planos y archivos 3D.</li>
+                    <li><strong>Archivo histórico:</strong> visor de plano real actual y esquema técnico.</li>
+                    <li><strong>Panel Admin:</strong> revisa reportes y modelos 3D.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="toast-notificacion" class="toast oculto">
+        <div class="toast-icon">🔔</div>
+        <div>
+            <h4 id="toast-titulo">Memoria Viva</h4>
+            <p id="toast-texto">Mensaje</p>
+            <a id="toast-link" href="#">Aceptar</a>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
