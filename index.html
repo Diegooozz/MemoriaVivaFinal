@@ -126,6 +126,7 @@
                 <li><button class="nav-link" data-target="sec-chatbot">🤖 MemorIA</button></li>
                 <li><button class="nav-link" data-target="sec-mapa">📍 Rutas GPS</button></li>
                 <li><button class="nav-link" data-target="sec-reconstruccion">🧠 Reconstrucción IA</button></li>
+                <li><button class="nav-link" data-target="sec-excavacion">⛏️ Excavación virtual</button></li>
                 <li><button class="nav-link" data-target="sec-reportar-alerta">🚨 Reportar alerta</button></li>
                 <li><button class="nav-link" data-target="sec-eventos-culturales">🔔 Eventos culturales</button></li>
                 <li><button class="nav-link" data-target="sec-archivo-historico">📐 Archivo histórico</button></li>
@@ -541,6 +542,101 @@
                 </div>
 
             </section>
+
+            <section id="sec-excavacion" class="section-app oculto">
+
+    <div class="section-deco">
+        <span></span><span></span><span></span>
+    </div>
+
+    <div class="section-header">
+        <div>
+            <h2>Excavación <span>virtual interactiva</span></h2>
+            <p>
+                Explora una zona arqueológica simulada, descubre hallazgos ocultos, analiza su significado cultural
+                y registra observaciones en un cuaderno de campo.
+            </p>
+        </div>
+    </div>
+
+    <div class="excavacion-layout">
+
+        <div class="info-panel">
+            <h3>Panel de excavación</h3>
+
+            <label for="excavacion-sitio">Sitio arqueológico</label>
+            <select id="excavacion-sitio" class="input-form"></select>
+
+            <label for="excavacion-nivel">Nivel de exploración</label>
+            <select id="excavacion-nivel" class="input-form">
+                <option value="superficial">Exploración superficial</option>
+                <option value="cuadrantes">Excavación por cuadrantes</option>
+                <option value="interpretacion">Interpretación arqueológica</option>
+            </select>
+
+            <button id="btn-iniciar-excavacion" class="btn-primary">INICIAR EXCAVACIÓN</button>
+
+            <div id="excavacion-progreso" class="status-box">
+                Selecciona un sitio e inicia la excavación.
+            </div>
+
+            <div class="excavacion-stats">
+                <div>
+                    <strong id="excavacion-intentos">0</strong>
+                    <span>Intentos</span>
+                </div>
+
+                <div>
+                    <strong id="excavacion-hallazgos">0</strong>
+                    <span>Hallazgos</span>
+                </div>
+
+                <div>
+                    <strong id="excavacion-puntaje">0</strong>
+                    <span>Puntos</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="excavacion-area-card">
+            <div class="excavacion-topbar">
+                <div>
+                    <h3>Zona de cuadrantes</h3>
+                    <p>Haz clic en los cuadrantes para excavar.</p>
+                </div>
+
+                <span id="excavacion-sitio-activo" class="tag">Sitio</span>
+            </div>
+
+            <div id="excavacion-grid" class="excavacion-grid"></div>
+        </div>
+
+    </div>
+
+    <div class="two-column mt-24">
+
+        <div id="excavacion-ficha" class="info-panel">
+            <h3>Ficha del hallazgo</h3>
+            <p>Cuando descubras un objeto, aquí aparecerá su interpretación cultural.</p>
+        </div>
+
+        <div class="info-panel">
+            <h3>Cuaderno de campo</h3>
+            <p>Registra una observación como si fueras parte de una excavación arqueológica.</p>
+
+            <label for="excavacion-observacion">Observación arqueológica</label>
+            <textarea id="excavacion-observacion" class="input-form textarea" placeholder="Ej. En el cuadrante B2 se identificó un fragmento de cerámica asociado a prácticas rituales..."></textarea>
+
+            <button id="btn-guardar-observacion-excavacion" class="btn-secondary full">
+                Guardar observación
+            </button>
+
+            <div id="excavacion-cuaderno" class="field-journal"></div>
+        </div>
+
+    </div>
+
+</section>
 
             <section id="sec-reportar-alerta" class="section-app oculto">
 

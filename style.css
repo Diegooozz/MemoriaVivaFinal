@@ -1652,3 +1652,282 @@ label {
         width: calc(100% - 28px);
     }
 }
+
+/* =========================================================
+   EXCAVACIÓN VIRTUAL INTERACTIVA
+========================================================= */
+
+.excavacion-layout {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 24px;
+    align-items: stretch;
+}
+
+.excavacion-area-card {
+    background:
+        radial-gradient(circle at top left, rgba(200, 111, 74, 0.12), transparent 35%),
+        linear-gradient(135deg, #fff7ed, #f2dfc6);
+    border: 1px solid var(--sand-2);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+}
+
+.excavacion-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.excavacion-topbar h3 {
+    color: var(--dark);
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.excavacion-topbar p {
+    color: var(--muted);
+}
+
+.excavacion-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+}
+
+.excavacion-celda {
+    position: relative;
+    min-height: 92px;
+    border: 2px solid rgba(150, 98, 55, 0.25);
+    border-radius: 18px;
+    background:
+        radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.25), transparent 22%),
+        linear-gradient(135deg, #b8794b, #8f5632);
+    color: #fffaf3;
+    font-weight: 900;
+    font-size: 1.35rem;
+    box-shadow: inset 0 -10px 22px rgba(0, 0, 0, 0.16), var(--shadow-sm);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.excavacion-celda::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle, rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+        radial-gradient(circle, rgba(0, 0, 0, 0.10) 1px, transparent 1px);
+    background-size: 18px 18px, 24px 24px;
+    opacity: 0.45;
+}
+
+.excavacion-celda span {
+    position: relative;
+    z-index: 2;
+}
+
+.excavacion-celda:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-md);
+}
+
+.excavacion-celda.excavada {
+    background: linear-gradient(135deg, #e3c6a4, #c69c72);
+    color: #6b4228;
+}
+
+.excavacion-celda.hallazgo {
+    background:
+        radial-gradient(circle at center, rgba(255, 255, 255, 0.35), transparent 42%),
+        linear-gradient(135deg, #3f7d58, #2f6043);
+    color: #ffffff;
+    animation: hallazgoPulse 0.65s ease both;
+}
+
+.excavacion-celda.vacia {
+    opacity: 0.78;
+}
+
+@keyframes hallazgoPulse {
+    0% {
+        transform: scale(0.96);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.excavacion-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.excavacion-stats div {
+    background: var(--sand);
+    border: 1px solid var(--sand-2);
+    border-radius: 16px;
+    padding: 14px 10px;
+    text-align: center;
+}
+
+.excavacion-stats strong {
+    display: block;
+    color: var(--terracotta-dark);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.excavacion-stats span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.hallazgo-card {
+    background: var(--sand);
+    border: 1px solid var(--sand-2);
+    border-radius: 18px;
+    padding: 18px;
+}
+
+.hallazgo-icon {
+    width: 82px;
+    height: 82px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: var(--white);
+    border: 1px solid var(--sand-2);
+    font-size: 2.6rem;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow-sm);
+}
+
+.hallazgo-card h3 {
+    color: var(--dark);
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.hallazgo-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+}
+
+.hallazgo-meta span {
+    background: var(--white);
+    border: 1px solid var(--sand-2);
+    color: var(--terracotta-dark);
+    border-radius: 999px;
+    padding: 7px 10px;
+    font-weight: 800;
+    font-size: 0.83rem;
+}
+
+.hallazgo-pregunta {
+    margin-top: 16px;
+    background: var(--white);
+    border: 1px solid var(--sand-2);
+    border-radius: 16px;
+    padding: 14px;
+}
+
+.hallazgo-opciones {
+    display: grid;
+    gap: 9px;
+    margin-top: 12px;
+}
+
+.btn-hallazgo-opcion {
+    width: 100%;
+    border: 1px solid var(--sand-2);
+    background: var(--sand);
+    color: var(--text);
+    border-radius: 13px;
+    padding: 11px 12px;
+    text-align: left;
+    font-weight: 800;
+    transition: var(--transition);
+}
+
+.btn-hallazgo-opcion:hover {
+    background: var(--terracotta-soft);
+    color: var(--terracotta-dark);
+}
+
+.btn-hallazgo-opcion.correcta {
+    background: #e6f6ec;
+    border-color: #a8d8ba;
+    color: var(--green-dark);
+}
+
+.btn-hallazgo-opcion.incorrecta {
+    background: #ffe8e6;
+    border-color: #efb5b1;
+    color: var(--red);
+}
+
+.field-journal {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.journal-item {
+    background: var(--sand);
+    border: 1px solid var(--sand-2);
+    border-radius: 16px;
+    padding: 14px;
+}
+
+.journal-item strong {
+    color: var(--terracotta-dark);
+}
+
+.journal-item small {
+    color: var(--muted);
+}
+
+@media (max-width: 1080px) {
+    .excavacion-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 760px) {
+    .excavacion-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .excavacion-celda {
+        min-height: 78px;
+    }
+
+    .excavacion-topbar {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .excavacion-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .excavacion-stats {
+        grid-template-columns: 1fr;
+    }
+}

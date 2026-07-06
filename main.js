@@ -2938,6 +2938,643 @@
         box._timer = setTimeout(() => box.classList.add("oculto"), 3300);
     }
 
+    /* =========================================================
+   EXCAVACIÓN VIRTUAL INTERACTIVA
+========================================================= */
+
+const STORAGE_EXCAVACION = {
+    cuaderno: "mv3_excavacion_cuaderno",
+    logros: "mv3_excavacion_logros"
+};
+
+const excavacionEstado = {
+    sitio: "machupicchu",
+    nivel: "superficial",
+    celdas: [],
+    intentos: 0,
+    hallazgos: 0,
+    puntaje: 0,
+    respondido: false
+};
+
+const excavacionHallazgos = {
+    machupicchu: [
+        {
+            icono: "🧱",
+            nombre: "Bloque de piedra labrada",
+            tipo: "Arquitectura",
+            profundidad: "Nivel superficial",
+            interpretacion: "Este hallazgo representa el trabajo de mampostería inca. La piedra labrada evidencia planificación, dominio técnico y adaptación al relieve andino.",
+            pregunta: "¿Qué permite interpretar un bloque de piedra labrada en Machu Picchu?",
+            opciones: [
+                "El dominio técnico de la arquitectura inca",
+                "La presencia de escritura alfabética",
+                "El uso de ladrillo industrial",
+                "La construcción de una ciudad moderna"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "💧",
+            nombre: "Canal de agua",
+            tipo: "Ingeniería hidráulica",
+            profundidad: "Nivel medio",
+            interpretacion: "Los canales de agua muestran la capacidad inca para conducir, distribuir y controlar el recurso hídrico dentro de un espacio ceremonial y residencial.",
+            pregunta: "¿Qué demuestra un canal de agua en un sitio inca?",
+            opciones: [
+                "Conocimiento hidráulico y planificación",
+                "Uso exclusivo de metal",
+                "Ausencia de organización",
+                "Influencia republicana"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🌄",
+            nombre: "Fragmento de marcador ritual",
+            tipo: "Ritualidad",
+            profundidad: "Nivel interpretativo",
+            interpretacion: "Este elemento permite relacionar la arquitectura con el paisaje sagrado y la observación del entorno natural.",
+            pregunta: "¿Por qué el paisaje era importante en Machu Picchu?",
+            opciones: [
+                "Porque se vinculaba con montañas sagradas y ritualidad",
+                "Porque servía solo como decoración",
+                "Porque impedía toda ocupación humana",
+                "Porque no tenía relación con la arquitectura"
+            ],
+            correcta: 0
+        }
+    ],
+
+    huacapucllana: [
+        {
+            icono: "🧱",
+            nombre: "Adobito vertical",
+            tipo: "Material constructivo",
+            profundidad: "Nivel superficial",
+            interpretacion: "El adobito vertical es característico de Huaca Pucllana. Su disposición favorecía la estabilidad de la estructura frente a movimientos sísmicos.",
+            pregunta: "¿Qué caracteriza a los adobitos de Huaca Pucllana?",
+            opciones: [
+                "Su colocación vertical en la estructura",
+                "Su fabricación con cemento moderno",
+                "Su uso como metal decorativo",
+                "Su origen colonial"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🏺",
+            nombre: "Fragmento cerámico Lima",
+            tipo: "Cerámica",
+            profundidad: "Nivel medio",
+            interpretacion: "La cerámica permite conocer prácticas ceremoniales, consumo, símbolos y relaciones sociales de la cultura Lima.",
+            pregunta: "¿Qué información puede brindar la cerámica arqueológica?",
+            opciones: [
+                "Prácticas culturales y formas de vida",
+                "Contraseñas de usuarios",
+                "Datos climáticos satelitales modernos",
+                "Información bancaria"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🪜",
+            nombre: "Rampa ceremonial",
+            tipo: "Circulación ritual",
+            profundidad: "Nivel interpretativo",
+            interpretacion: "Las rampas organizaban la circulación dentro del centro ceremonial y marcaban recorridos vinculados a actividades rituales.",
+            pregunta: "¿Qué función podían cumplir las rampas en un centro ceremonial?",
+            opciones: [
+                "Organizar recorridos rituales",
+                "Servir como autopistas modernas",
+                "Reemplazar los canales de agua",
+                "Eliminar la función ceremonial"
+            ],
+            correcta: 0
+        }
+    ],
+
+    nazca: [
+        {
+            icono: "〰️",
+            nombre: "Línea recta ceremonial",
+            tipo: "Geoglifo",
+            profundidad: "Superficie desértica",
+            interpretacion: "Las líneas rectas forman parte del paisaje ritual Nazca. Fueron trazadas retirando piedras oscuras para exponer el suelo claro.",
+            pregunta: "¿Cómo se elaboraban muchas Líneas de Nazca?",
+            opciones: [
+                "Retirando piedras oscuras de la superficie",
+                "Pintando con pintura industrial",
+                "Tallando mármol blanco",
+                "Construyendo muros elevados"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🌀",
+            nombre: "Fragmento de diseño simbólico",
+            tipo: "Iconografía",
+            profundidad: "Superficie ritual",
+            interpretacion: "Los diseños simbólicos expresan una relación entre territorio, ritualidad, agua y organización social.",
+            pregunta: "¿Qué expresan los geoglifos de Nazca?",
+            opciones: [
+                "Ritualidad y relación simbólica con el paisaje",
+                "Publicidad comercial",
+                "Señalización vehicular moderna",
+                "Decoración sin significado"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🏺",
+            nombre: "Cerámica Nazca policroma",
+            tipo: "Cerámica",
+            profundidad: "Nivel cultural",
+            interpretacion: "La cerámica Nazca destaca por su riqueza cromática y por representar seres, símbolos y escenas vinculadas a su cosmovisión.",
+            pregunta: "¿Por qué destaca la cerámica Nazca?",
+            opciones: [
+                "Por su policromía y simbolismo",
+                "Por estar hecha de plástico",
+                "Por no tener decoración",
+                "Por ser exclusivamente colonial"
+            ],
+            correcta: 0
+        }
+    ],
+
+    caral: [
+        {
+            icono: "🔺",
+            nombre: "Bloque de plataforma piramidal",
+            tipo: "Arquitectura monumental",
+            profundidad: "Nivel estructural",
+            interpretacion: "Las plataformas piramidales expresan planificación urbana, poder ceremonial y organización colectiva temprana.",
+            pregunta: "¿Qué evidencian las pirámides de Caral?",
+            opciones: [
+                "Urbanismo temprano y organización social",
+                "Arquitectura medieval europea",
+                "Construcción industrial reciente",
+                "Ausencia de planificación"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "⭕",
+            nombre: "Borde de plaza circular",
+            tipo: "Espacio ceremonial",
+            profundidad: "Nivel medio",
+            interpretacion: "Las plazas circulares hundidas se relacionan con reuniones, rituales y organización ceremonial.",
+            pregunta: "¿Con qué se relacionan las plazas circulares de Caral?",
+            opciones: [
+                "Actividades ceremoniales y sociales",
+                "Estacionamientos modernos",
+                "Campos deportivos actuales",
+                "Zonas comerciales republicanas"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🎶",
+            nombre: "Instrumento musical ritual",
+            tipo: "Artefacto ceremonial",
+            profundidad: "Nivel cultural",
+            interpretacion: "Los instrumentos musicales sugieren actividades rituales, ceremonias y expresiones simbólicas de la sociedad Caral.",
+            pregunta: "¿Qué puede indicar un instrumento musical en Caral?",
+            opciones: [
+                "Prácticas rituales y expresiones simbólicas",
+                "Uso de electricidad moderna",
+                "Actividad minera industrial",
+                "Ausencia de cultura"
+            ],
+            correcta: 0
+        }
+    ],
+
+    chanchan: [
+        {
+            icono: "🌊",
+            nombre: "Relieve marino",
+            tipo: "Iconografía",
+            profundidad: "Nivel superficial",
+            interpretacion: "Los relieves marinos reflejan la importancia del mar, la pesca, las aves y las redes en la cosmovisión Chimú.",
+            pregunta: "¿Qué representan muchos relieves de Chan Chan?",
+            opciones: [
+                "Motivos marinos y relación con el mar",
+                "Máquinas industriales",
+                "Vehículos modernos",
+                "Paisajes europeos"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🧱",
+            nombre: "Fragmento de muro de barro",
+            tipo: "Arquitectura",
+            profundidad: "Nivel estructural",
+            interpretacion: "Chan Chan fue una gran ciudad de barro. Sus muros organizaban espacios administrativos, ceremoniales y residenciales.",
+            pregunta: "¿Cuál fue un material principal en Chan Chan?",
+            opciones: [
+                "Barro",
+                "Acero industrial",
+                "Vidrio templado",
+                "Concreto armado moderno"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🕸️",
+            nombre: "Diseño de red de pesca",
+            tipo: "Símbolo productivo",
+            profundidad: "Nivel interpretativo",
+            interpretacion: "El diseño de redes evidencia la importancia de la actividad marina y la organización económica en la costa norte.",
+            pregunta: "¿Qué sugiere la presencia de diseños de redes?",
+            opciones: [
+                "Importancia de la pesca y economía marina",
+                "Uso de internet antiguo",
+                "Actividad aérea",
+                "Ausencia de contacto con el mar"
+            ],
+            correcta: 0
+        }
+    ],
+
+    kuelap: [
+        {
+            icono: "🪨",
+            nombre: "Piedra de muralla",
+            tipo: "Arquitectura defensiva",
+            profundidad: "Nivel estructural",
+            interpretacion: "Las murallas de Kuélap muestran control espacial, protección y monumentalidad arquitectónica en la cultura Chachapoyas.",
+            pregunta: "¿Qué expresan las murallas de Kuélap?",
+            opciones: [
+                "Control espacial y monumentalidad",
+                "Arquitectura de playa",
+                "Diseño urbano republicano",
+                "Uso de adobe costeño"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "⚪",
+            nombre: "Base de recinto circular",
+            tipo: "Vivienda o espacio ritual",
+            profundidad: "Nivel medio",
+            interpretacion: "Los recintos circulares son característicos de la arquitectura Chachapoyas y permiten estudiar formas de ocupación del espacio.",
+            pregunta: "¿Qué forma tenían muchos recintos de Kuélap?",
+            opciones: [
+                "Circular",
+                "Triangular metálica",
+                "Rectangular industrial",
+                "Ovalada de vidrio"
+            ],
+            correcta: 0
+        },
+        {
+            icono: "🌫️",
+            nombre: "Indicador de humedad arqueológica",
+            tipo: "Conservación",
+            profundidad: "Nivel de riesgo",
+            interpretacion: "La humedad, la vegetación y la estabilidad del terreno son factores críticos para la conservación de Kuélap.",
+            pregunta: "¿Qué riesgo afecta la conservación de Kuélap?",
+            opciones: [
+                "Humedad y estabilidad del terreno",
+                "Oleaje marino directo",
+                "Tránsito de barcos",
+                "Contaminación industrial pesada en el recinto"
+            ],
+            correcta: 0
+        }
+    ]
+};
+
+function configurarExcavacionVirtual() {
+    const select = $("excavacion-sitio");
+
+    if (!select) return;
+
+    if (select.dataset.configurado === "true") return;
+
+    select.innerHTML = lugares.map(l => `
+        <option value="${l.id}">${escapeHTML(l.nombre)}</option>
+    `).join("");
+
+    $("btn-iniciar-excavacion")?.addEventListener("click", iniciarExcavacionVirtual);
+
+    $("excavacion-sitio")?.addEventListener("change", iniciarExcavacionVirtual);
+    $("excavacion-nivel")?.addEventListener("change", iniciarExcavacionVirtual);
+
+    $("btn-guardar-observacion-excavacion")?.addEventListener("click", guardarObservacionExcavacion);
+
+    select.dataset.configurado = "true";
+
+    iniciarExcavacionVirtual();
+    renderCuadernoExcavacion();
+}
+
+function iniciarExcavacionVirtual() {
+    const sitio = valor("excavacion-sitio") || "machupicchu";
+    const nivel = valor("excavacion-nivel") || "superficial";
+    const lugar = obtenerLugar(sitio);
+    const hallazgos = excavacionHallazgos[sitio] || excavacionHallazgos.machupicchu;
+
+    excavacionEstado.sitio = sitio;
+    excavacionEstado.nivel = nivel;
+    excavacionEstado.intentos = 0;
+    excavacionEstado.hallazgos = 0;
+    excavacionEstado.puntaje = 0;
+    excavacionEstado.respondido = false;
+
+    const totalCeldas = 20;
+    const posiciones = generarPosicionesAleatorias(totalCeldas, hallazgos.length);
+
+    excavacionEstado.celdas = Array.from({ length: totalCeldas }, (_, index) => {
+        const hallazgoIndex = posiciones.indexOf(index);
+
+        return {
+            index,
+            excavada: false,
+            hallazgo: hallazgoIndex >= 0 ? hallazgos[hallazgoIndex] : null
+        };
+    });
+
+    setTexto("excavacion-sitio-activo", lugar.nombre);
+
+    $("excavacion-ficha").innerHTML = `
+        <h3>Ficha del hallazgo</h3>
+        <p>
+            La excavación en <strong>${escapeHTML(lugar.nombre)}</strong> está lista.
+            Haz clic en los cuadrantes para descubrir posibles evidencias arqueológicas.
+        </p>
+        <div class="status-box">
+            Consejo: no todos los cuadrantes contienen hallazgos. La interpretación arqueológica depende del registro ordenado.
+        </div>
+    `;
+
+    renderExcavacionGrid();
+    actualizarEstadoExcavacion();
+}
+
+function generarPosicionesAleatorias(total, cantidad) {
+    const numeros = Array.from({ length: total }, (_, i) => i);
+
+    for (let i = numeros.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
+    }
+
+    return numeros.slice(0, cantidad);
+}
+
+function renderExcavacionGrid() {
+    const grid = $("excavacion-grid");
+
+    if (!grid) return;
+
+    grid.innerHTML = excavacionEstado.celdas.map(celda => {
+        let clase = "excavacion-celda";
+        let contenido = `<span>${nombreCuadrante(celda.index)}</span>`;
+
+        if (celda.excavada && celda.hallazgo) {
+            clase += " excavada hallazgo";
+            contenido = `<span>${celda.hallazgo.icono}</span>`;
+        } else if (celda.excavada && !celda.hallazgo) {
+            clase += " excavada vacia";
+            contenido = `<span>·</span>`;
+        }
+
+        return `
+            <button class="${clase}" data-index="${celda.index}" title="Cuadrante ${nombreCuadrante(celda.index)}">
+                ${contenido}
+            </button>
+        `;
+    }).join("");
+
+    $all(".excavacion-celda").forEach(btn => {
+        btn.addEventListener("click", () => excavarCelda(Number(btn.dataset.index)));
+    });
+}
+
+function nombreCuadrante(index) {
+    const filas = ["A", "B", "C", "D"];
+    const fila = filas[Math.floor(index / 5)] || "A";
+    const columna = (index % 5) + 1;
+
+    return `${fila}${columna}`;
+}
+
+function excavarCelda(index) {
+    const celda = excavacionEstado.celdas[index];
+
+    if (!celda || celda.excavada) {
+        toast("Ese cuadrante ya fue excavado.");
+        return;
+    }
+
+    celda.excavada = true;
+    excavacionEstado.intentos++;
+
+    if (celda.hallazgo) {
+        excavacionEstado.hallazgos++;
+        excavacionEstado.puntaje += 50;
+        excavacionEstado.respondido = false;
+
+        if (typeof sumarXP === "function") {
+            sumarXP(25);
+        }
+
+        mostrarFichaHallazgo(celda.hallazgo, nombreCuadrante(index));
+        toast("Hallazgo descubierto. Ganaste 25 XP.");
+    } else {
+        $("excavacion-ficha").innerHTML = `
+            <h3>Cuadrante ${nombreCuadrante(index)}</h3>
+            <p>No se identificó un objeto arqueológico en este cuadrante.</p>
+            <div class="status-box">
+                Registro de campo: un cuadrante vacío también es información útil porque ayuda a delimitar zonas de ocupación.
+            </div>
+        `;
+    }
+
+    renderExcavacionGrid();
+    actualizarEstadoExcavacion();
+    verificarFinExcavacion();
+}
+
+function mostrarFichaHallazgo(hallazgo, cuadrante) {
+    $("excavacion-ficha").innerHTML = `
+        <div class="hallazgo-card">
+            <div class="hallazgo-icon">${hallazgo.icono}</div>
+
+            <h3>${escapeHTML(hallazgo.nombre)}</h3>
+
+            <div class="hallazgo-meta">
+                <span>Cuadrante ${escapeHTML(cuadrante)}</span>
+                <span>${escapeHTML(hallazgo.tipo)}</span>
+                <span>${escapeHTML(hallazgo.profundidad)}</span>
+            </div>
+
+            <p>${escapeHTML(hallazgo.interpretacion)}</p>
+
+            <div class="hallazgo-pregunta">
+                <strong>Pregunta de análisis</strong>
+                <p>${escapeHTML(hallazgo.pregunta)}</p>
+
+                <div class="hallazgo-opciones">
+                    ${hallazgo.opciones.map((opcion, i) => `
+                        <button class="btn-hallazgo-opcion" data-correcta="${i === hallazgo.correcta}">
+                            ${escapeHTML(opcion)}
+                        </button>
+                    `).join("")}
+                </div>
+
+                <div id="hallazgo-feedback" class="status-box">
+                    Responde para validar tu interpretación arqueológica.
+                </div>
+            </div>
+        </div>
+    `;
+
+    $all(".btn-hallazgo-opcion").forEach(btn => {
+        btn.addEventListener("click", () => responderPreguntaHallazgo(btn));
+    });
+}
+
+function responderPreguntaHallazgo(btn) {
+    if (excavacionEstado.respondido) return;
+
+    const correcta = btn.dataset.correcta === "true";
+    excavacionEstado.respondido = true;
+
+    $all(".btn-hallazgo-opcion").forEach(opcion => {
+        if (opcion.dataset.correcta === "true") {
+            opcion.classList.add("correcta");
+        }
+    });
+
+    if (correcta) {
+        btn.classList.add("correcta");
+        excavacionEstado.puntaje += 25;
+
+        if (typeof sumarXP === "function") {
+            sumarXP(15);
+        }
+
+        $("hallazgo-feedback").innerHTML = "✅ Interpretación correcta. Ganaste 15 XP adicionales.";
+    } else {
+        btn.classList.add("incorrecta");
+        $("hallazgo-feedback").innerHTML = "❌ Respuesta incorrecta. Revisa la interpretación del hallazgo.";
+    }
+
+    actualizarEstadoExcavacion();
+}
+
+function actualizarEstadoExcavacion() {
+    const totalHallazgos = excavacionHallazgos[excavacionEstado.sitio]?.length || 0;
+    const lugar = obtenerLugar(excavacionEstado.sitio);
+
+    setTexto("excavacion-intentos", excavacionEstado.intentos);
+    setTexto("excavacion-hallazgos", excavacionEstado.hallazgos);
+    setTexto("excavacion-puntaje", excavacionEstado.puntaje);
+
+    $("excavacion-progreso").innerHTML = `
+        <strong>${escapeHTML(lugar.nombre)}</strong><br>
+        Hallazgos recuperados: ${excavacionEstado.hallazgos} de ${totalHallazgos}.<br>
+        Nivel: ${escapeHTML(nombreNivelExcavacion(excavacionEstado.nivel))}.
+    `;
+}
+
+function nombreNivelExcavacion(nivel) {
+    const nombres = {
+        superficial: "Exploración superficial",
+        cuadrantes: "Excavación por cuadrantes",
+        interpretacion: "Interpretación arqueológica"
+    };
+
+    return nombres[nivel] || "Exploración superficial";
+}
+
+function verificarFinExcavacion() {
+    const totalHallazgos = excavacionHallazgos[excavacionEstado.sitio]?.length || 0;
+
+    if (excavacionEstado.hallazgos === totalHallazgos) {
+        const lugar = obtenerLugar(excavacionEstado.sitio);
+
+        setTimeout(() => {
+            toast(`Excavación completada en ${lugar.nombre}.`);
+
+            $("excavacion-progreso").innerHTML += `
+                <div class="status-box">
+                    ✅ Excavación completada. Se recuperaron todos los hallazgos disponibles del sitio.
+                </div>
+            `;
+        }, 350);
+    }
+}
+
+function guardarObservacionExcavacion() {
+    const texto = valor("excavacion-observacion");
+
+    if (!texto) {
+        toast("Escribe una observación de campo antes de guardar.");
+        return;
+    }
+
+    const lugar = obtenerLugar(excavacionEstado.sitio);
+    const registros = leer(STORAGE_EXCAVACION.cuaderno, []);
+
+    registros.unshift({
+        id: "obs-" + Date.now(),
+        usuario: estado.usuario ? estado.usuario.nombre : "Usuario",
+        sitio: lugar.nombre,
+        sitioId: lugar.id,
+        texto,
+        hallazgos: excavacionEstado.hallazgos,
+        intentos: excavacionEstado.intentos,
+        fecha: new Date().toISOString()
+    });
+
+    guardar(STORAGE_EXCAVACION.cuaderno, registros);
+
+    $("excavacion-observacion").value = "";
+
+    if (typeof sumarXP === "function") {
+        sumarXP(20);
+    }
+
+    renderCuadernoExcavacion();
+    toast("Observación guardada. Ganaste 20 XP.");
+}
+
+function renderCuadernoExcavacion() {
+    const cont = $("excavacion-cuaderno");
+
+    if (!cont) return;
+
+    const registros = leer(STORAGE_EXCAVACION.cuaderno, []);
+
+    if (!registros.length) {
+        cont.innerHTML = `
+            <div class="journal-item">
+                <p>Aún no tienes observaciones registradas.</p>
+            </div>
+        `;
+        return;
+    }
+
+    cont.innerHTML = registros.slice(0, 5).map(r => `
+        <div class="journal-item">
+            <strong>${escapeHTML(r.sitio)}</strong><br>
+            <small>${fechaBonita(r.fecha)} · ${r.hallazgos} hallazgos · ${r.intentos} intentos</small>
+            <p>${escapeHTML(r.texto)}</p>
+        </div>
+    `).join("");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+        configurarExcavacionVirtual();
+    }, 400);
+});
+
     window.memoriaVivaDebug = {
         cerrarSesion,
         limpiarSesion: function () {
